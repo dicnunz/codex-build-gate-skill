@@ -94,13 +94,20 @@ function install(rawOptions = {}) {
   }
 
   const exists = fs.existsSync(destination);
-  if (exists && !rawOptions.force) {
-    throw new Error(`${destination} already exists. Re-run with --force to replace it with a timestamped backup.`);
+  const plannedBackup = exists && rawOptions.force ? backupPath(destination) : null;
+  if (rawOptions.dryRun) {
+    return {
+      source,
+      destination,
+      backup: plannedBackup,
+      dryRun: true,
+      exists,
+      conflict: exists && !rawOptions.force,
+    };
   }
 
-  const plannedBackup = exists ? backupPath(destination) : null;
-  if (rawOptions.dryRun) {
-    return { source, destination, backup: plannedBackup, dryRun: true };
+  if (exists && !rawOptions.force) {
+    throw new Error(`${destination} already exists. Re-run with --force to replace it with a timestamped backup.`);
   }
 
   fs.mkdirSync(skillsDir, { recursive: true });
@@ -121,6 +128,11 @@ function main(argv = process.argv.slice(2)) {
 
   const result = install(options);
   if (result.dryRun) {
+    if (result.conflict) {
+      console.log(`${SKILL_NAME} already exists at ${result.destination}`);
+      console.log("Would leave the existing install unchanged. Re-run with --force to preview replacement.");
+      return;
+    }
     console.log(`Would install ${SKILL_NAME} to ${result.destination}`);
     if (result.backup) console.log(`Would back up existing install to ${result.backup}`);
     return;

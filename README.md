@@ -1,16 +1,52 @@
-# Codex Build Gate Skill
+# Build Gate for Codex
 
-`build-gate` is a Codex skill that stops Codex from building a startup idea before the idea clears a proof gate.
+[![CI](https://github.com/dicnunz/codex-build-gate-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/dicnunz/codex-build-gate-skill/actions/workflows/ci.yml)
 
-It is built for the moment right before implementation: buyer clarity, current behavior, proof gaps, first buyers, a two-week validation contract, and a hard no-build clause.
+Codex is fast enough to build the wrong product in one sitting.
 
-## Why this exists
+`build-gate` is the missing pre-build guardrail: a Codex skill that forces a startup idea through buyer proof, current behavior, reachable first customers, and a two-week validation contract before implementation is allowed.
+
+If the idea cannot clear the gate, Codex does not write product code. It gives you the smallest proof move instead.
+
+## Install
+
+```bash
+npx --yes github:dicnunz/codex-build-gate-skill
+```
+
+Then restart Codex so it discovers the skill.
+
+Use it before implementation:
+
+```text
+Use $build-gate before building this:
+
+Idea: AI bookkeeping cleanup for solo founders.
+Customer: US solo founders using QuickBooks.
+Desired behavior: pay $49 for a one-time cleanup.
+```
+
+## What You Get
+
+Build Gate returns a build/no-build packet:
+
+- `Pass / Hold / Pivot / Kill` gate result
+- proof ledger separating `Provided`, `Verified`, `Assumed`, and `Unknown`
+- current-behavior map, because the real competitor is often a spreadsheet, agency, intern, script, or doing nothing
+- locked door: the one assumption that decides whether the product deserves build time
+- no-build clause that blocks implementation until the riskiest proof exists
+- next 10 buyer moves instead of vague "talk to users" advice
+- two-week validation contract with pass/fail/kill criteria
+
+See a full example: [examples/ai-bookkeeping-cleanup.md](examples/ai-bookkeeping-cleanup.md).
+
+## Why This Exists
 
 Most startup validators produce confident theater: big-market language, generic scorecards, and a verdict that still lets the agent go build the wrong thing.
 
 Build Gate is stricter. It makes the agent say what proof is missing and what must happen before build time is allowed.
 
-## Why use this one
+## Why Use This One
 
 Simple pressure-test skills are useful if you want a harsh opinion.
 
@@ -24,35 +60,34 @@ Build Gate is for when you want an operating constraint:
 - Two-week validation contract with pass/fail/kill criteria.
 - Non-destructive installer that refuses to overwrite an existing skill unless `--force` creates a backup.
 
-## What it does
+## 30-Second Demo
 
-- Gives a direct `Pass`, `Hold`, `Pivot`, or `Kill` gate result.
-- Builds a proof ledger instead of pretending weak signals are proof.
-- Scores pain, buyer clarity, urgency, current workaround, differentiation, reachability, validation speed, and founder edge.
-- Maps current behavior as the real competition.
-- Designs next-10-buyer moves before ads or launch theater.
-- Defines a two-week validation contract with test/cut/pass/fail lines.
-- Browses or asks for source proof when current market facts matter.
-
-## Install from GitHub
-
-```bash
-npx --yes github:dicnunz/codex-build-gate-skill
-```
-
-Then restart Codex so it discovers the new skill.
-
-Use:
+Prompt:
 
 ```text
 Use $build-gate before building this:
-
-Idea: AI bookkeeping cleanup for solo founders.
-Customer: US solo founders using QuickBooks.
-Desired behavior: pay $49 for a one-time cleanup.
+AI bookkeeping cleanup for solo founders using QuickBooks.
+I want them to pay $49 for a one-time cleanup.
 ```
 
-## Safer installer behavior
+Expected shape:
+
+```markdown
+**Gate**
+Hold
+
+Do not build the app yet. The buyer and pain are plausible, but willingness to pay is still unknown.
+
+**No-Build Clause**
+Do not implement dashboards, integrations, auth, or billing until 3 of 15 target founders either pay for a manual cleanup or share real bookkeeping workflow access.
+
+**Next 10 Buyer Moves**
+1. Find 10 solo founders posting about tax cleanup, QuickBooks pain, or messy books.
+2. Offer a $49 manual cleanup review with a before/after summary.
+3. Count only paid cleanup, workflow access, or a concrete refusal reason as signal.
+```
+
+## Safer Installer Behavior
 
 The installer copies `build-gate/` into:
 
@@ -78,7 +113,19 @@ Install somewhere else:
 npx --yes github:dicnunz/codex-build-gate-skill --skills-dir ./skills
 ```
 
-## Manual install
+## Validation Packet Helper
+
+Create a reusable Markdown packet:
+
+```bash
+node build-gate/scripts/make-validation-packet.js \
+  --idea "AI bookkeeping cleanup for solo founders" \
+  --customer "US solo founders using QuickBooks" \
+  --outcome "pay $49 for a one-time cleanup" \
+  --out packet.md
+```
+
+## Manual Install
 
 ```bash
 git clone https://github.com/dicnunz/codex-build-gate-skill.git
@@ -98,17 +145,16 @@ Restart Codex.
 - `wedge`: switching reason, buyer language, category, credibility proof.
 - `full`: compact all-in-one diagnosis.
 
-## Validation packet helper
+## How It Is Different
 
-Create a reusable Markdown packet:
+Build Gate is not trying to be the loudest startup critic. It is trying to change Codex's behavior.
 
-```bash
-node build-gate/scripts/make-validation-packet.js \
-  --idea "AI bookkeeping cleanup for solo founders" \
-  --customer "US solo founders using QuickBooks" \
-  --outcome "pay $49 for a one-time cleanup" \
-  --out packet.md
-```
+The core primitive is the gate:
+
+- weak proof means Codex must stop before product code
+- missing buyer behavior becomes a named locked door
+- validation is expressed as a contract with pass/fail/kill lines
+- the next move is a customer-facing test, not another feature
 
 ## Development
 

@@ -1,7 +1,7 @@
 {
   "name": "codex-build-gate-skill",
-  "version": "0.1.0",
-  "description": "A Codex skill that stops agents from building startup ideas before evidence clears the gate.",
+  "version": "0.2.0",
+  "description": "Pre-build proof gate for Codex: stop agents from coding startup ideas until buyer evidence clears.",
   "license": "MIT",
   "author": "Nicholas Dunzelman",
   "repository": {
@@ -21,14 +21,20 @@
   },
   "files": [
     "build-gate",
+    "examples",
     "scripts/install.js",
     "README.md",
     "LICENSE"
   ],
   "keywords": [
     "codex",
+    "codex-skill",
     "skill",
+    "ai-agent",
     "startup",
+    "startup-validation",
+    "idea-validation",
+    "customer-discovery",
     "validation",
     "mvp",
     "founder",

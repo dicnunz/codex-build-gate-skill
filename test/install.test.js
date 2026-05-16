@@ -31,6 +31,16 @@ test("install refuses to overwrite without force", () => {
   assert.throws(() => install({ skillsDir: dir }), /already exists/);
 });
 
+test("dry run reports an existing install without throwing", () => {
+  const dir = tempDir();
+  install({ skillsDir: dir });
+  const result = install({ skillsDir: dir, dryRun: true });
+  assert.equal(result.dryRun, true);
+  assert.equal(result.exists, true);
+  assert.equal(result.conflict, true);
+  assert.equal(result.backup, null);
+});
+
 test("force install creates a timestamped backup", () => {
   const dir = tempDir();
   install({ skillsDir: dir });
