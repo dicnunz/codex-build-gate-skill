@@ -1,0 +1,43 @@
+{
+  "name": "codex-venture-surgeon-skill",
+  "version": "0.1.0",
+  "description": "A Codex skill for evidence-first startup triage, validation, and build/no-build decisions.",
+  "license": "MIT",
+  "author": "Nicholas Dunzelman",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dicnunz/codex-venture-surgeon-skill.git"
+  },
+  "homepage": "https://github.com/dicnunz/codex-venture-surgeon-skill#readme",
+  "bugs": {
+    "url": "https://github.com/dicnunz/codex-venture-surgeon-skill/issues"
+  },
+  "bin": {
+    "codex-venture-surgeon-skill": "scripts/install.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "files": [
+    "venture-surgeon",
+    "scripts/install.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "codex",
+    "skill",
+    "startup",
+    "validation",
+    "mvp",
+    "founder",
+    "customers"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

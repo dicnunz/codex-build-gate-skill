@@ -1,0 +1,4 @@
+interface:
+  display_name: "Venture Surgeon"
+  short_description: "Evidence-first startup triage and validation"
+  default_prompt: "Use $venture-surgeon to decide whether this startup idea deserves build time."
