@@ -1,26 +1,26 @@
 {
-  "name": "codex-venture-surgeon-skill",
+  "name": "codex-build-gate-skill",
   "version": "0.1.0",
-  "description": "A Codex skill for evidence-first startup triage, validation, and build/no-build decisions.",
+  "description": "A Codex skill that stops agents from building startup ideas before evidence clears the gate.",
   "license": "MIT",
   "author": "Nicholas Dunzelman",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dicnunz/codex-venture-surgeon-skill.git"
+    "url": "git+https://github.com/dicnunz/codex-build-gate-skill.git"
   },
-  "homepage": "https://github.com/dicnunz/codex-venture-surgeon-skill#readme",
+  "homepage": "https://github.com/dicnunz/codex-build-gate-skill#readme",
   "bugs": {
-    "url": "https://github.com/dicnunz/codex-venture-surgeon-skill/issues"
+    "url": "https://github.com/dicnunz/codex-build-gate-skill/issues"
   },
   "bin": {
-    "codex-venture-surgeon-skill": "scripts/install.js"
+    "codex-build-gate-skill": "scripts/install.js"
   },
   "scripts": {
     "test": "node --test",
     "pack:check": "npm pack --dry-run"
   },
   "files": [
-    "venture-surgeon",
+    "build-gate",
     "scripts/install.js",
     "README.md",
     "LICENSE"

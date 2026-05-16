@@ -6,7 +6,7 @@ function usage() {
   return `Usage:
   node make-validation-packet.js --idea IDEA --customer CUSTOMER --outcome OUTCOME [--out FILE]
 
-Creates a Markdown validation packet for Venture Surgeon workflows.`;
+Creates a Markdown validation packet for Build Gate workflows.`;
 }
 
 function parseArgs(argv) {
@@ -34,7 +34,7 @@ function requireField(options, field) {
 }
 
 function renderPacket({ idea, customer, outcome }) {
-  return `# Venture Validation Packet
+  return `# Build Gate Packet
 
 ## Inputs
 
@@ -42,12 +42,12 @@ function renderPacket({ idea, customer, outcome }) {
 - Target customer: ${customer}
 - Desired behavior/payment: ${outcome}
 
-## Decision
+## Gate
 
-- Current verdict:
+- Pass / Hold / Pivot / Kill:
 - Why:
 
-## Evidence Ledger
+## Proof Ledger
 
 | Claim | Status | Why It Matters | Proof Needed |
 |---|---|---|---|
@@ -64,15 +64,21 @@ function renderPacket({ idea, customer, outcome }) {
 | Urgency | TBD |  |
 | Current workaround | TBD |  |
 | Differentiation | TBD |  |
-| Distribution access | TBD |  |
+| Reachability | TBD |  |
 | Validation speed | TBD |  |
 | Founder edge | TBD |  |
 
-## Riskiest Assumption
+## Locked Door
 
 The customer will ${outcome} because the pain is urgent enough to change current behavior.
 
-## First 10 Customers
+## No-Build Clause
+
+Do not implement beyond:
+
+Until this proof exists:
+
+## Next 10 Buyer Moves
 
 | Prospect | Source | Trigger | Ask | Result |
 |---|---|---|---|---|
@@ -80,9 +86,9 @@ The customer will ${outcome} because the pain is urgent enough to change current
 |  |  |  |  |  |
 |  |  |  |  |  |
 
-## 2-Week MVP Contract
+## Two-Week Validation Contract
 
-- Build:
+- Test:
 - Concierge/manual:
 - Cut:
 - Pass:

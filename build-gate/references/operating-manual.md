@@ -1,19 +1,19 @@
-# Venture Surgeon Operating Manual
+# Build Gate Operating Manual
 
-Load this file for full reports, unfamiliar markets, live competitor checks, or when a verdict depends on current facts.
+Load this file for full gate reviews, unfamiliar markets, live competitor checks, or when the build/no-build decision depends on current facts.
 
 ## Core Frame
 
-A startup idea earns build time only when four things line up:
+A startup idea passes the build gate only when four things line up:
 
 1. A specific person has a painful repeated problem.
 2. That person already spends money, time, status, or attention trying to solve it.
 3. The founder can reach enough of those people manually.
 4. A 2-week test can create evidence that changes the decision.
 
-If any one of those is absent, the output should shift from build planning to validation, pivoting, or killing.
+If any one of those is absent, keep the gate closed and prescribe the smallest proof move.
 
-## Evidence Quality Ladder
+## Proof Quality Ladder
 
 Rank evidence from strongest to weakest:
 
@@ -25,7 +25,7 @@ Rank evidence from strongest to weakest:
 6. Customer joins a waitlist or says they would use it.
 7. Founder thinks the market is large.
 
-Use weak evidence only as a reason to run a test, not as proof to build.
+Use weak evidence only as a reason to run a test, not as permission to build.
 
 ## Scorecard Guidance
 
@@ -38,7 +38,7 @@ Use 1-5 scores tied to evidence:
 | Urgency | No deadline | Seasonal or occasional | Immediate trigger or penalty |
 | Current workaround | None | Manual workaround | Paid/currently tolerated bad tool |
 | Differentiation | Feature clone | Sharper workflow | Clear wedge or unfair access |
-| Distribution access | Cold generic audience | Known channels | Direct access to early adopters |
+| Reachability | Cold generic audience | Known channels | Direct access to early adopters |
 | Validation speed | Months | Several weeks | Testable inside 14 days |
 | Founder edge | None | Some domain taste | Real access, proof, skill, or credibility |
 
@@ -46,11 +46,11 @@ Do not average scores mechanically. One fatal zero can dominate the verdict.
 
 ## Mode Playbooks
 
-### triage
+### gate
 
-Output the decision, 3 strongest reasons, riskiest assumption, fastest test, and kill line.
+Output the gate result, 2 strongest reasons, locked door, no-build clause, fastest proof move, and kill line.
 
-### evidence-map
+### proof
 
 Build a table:
 
@@ -59,7 +59,7 @@ Build a table:
 
 Prefer tests that ask for money, workflow access, or behavior change.
 
-### competition
+### behavior
 
 Map:
 
@@ -71,7 +71,7 @@ Map:
 
 Browse when competitor existence, pricing, packaging, or recency matters.
 
-### customer-route
+### first-buyers
 
 Define:
 
@@ -83,7 +83,7 @@ Define:
 
 Avoid ads, launch platforms, generic communities, and growth hacks until manual reach works.
 
-### mvp-contract
+### validation-contract
 
 State:
 
@@ -96,7 +96,7 @@ State:
 
 Default MVP window is 14 days.
 
-### positioning
+### wedge
 
 Find the wedge by completing:
 
@@ -111,15 +111,15 @@ Keep positioning grounded in proof. Do not create grand category language before
 
 Use all of the following, compactly:
 
-1. Decision.
-2. Evidence ledger.
+1. Gate result.
+2. Proof ledger.
 3. Scorecard.
-4. Riskiest assumption.
-5. Failure modes.
-6. Competition/current behavior.
-7. First 10 customer route.
-8. MVP contract.
-9. Kill criteria.
+4. Locked door.
+5. No-build clause.
+6. Current behavior and substitutes.
+7. Next 10 buyer moves.
+8. Two-week contract.
+9. Kill criteria and pivot trigger.
 
 ## Kill Criteria Examples
 

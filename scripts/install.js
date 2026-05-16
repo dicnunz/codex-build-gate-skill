@@ -4,14 +4,14 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 
-const SKILL_NAME = "venture-surgeon";
+const SKILL_NAME = "build-gate";
 
 function usage() {
-  return `Codex Venture Surgeon installer
+  return `Codex Build Gate installer
 
 Usage:
-  npx github:dicnunz/codex-venture-surgeon-skill
-  codex-venture-surgeon-skill --skills-dir ~/.codex/skills --force
+  npx github:dicnunz/codex-build-gate-skill
+  codex-build-gate-skill --skills-dir ~/.codex/skills --force
 
 Options:
   --skills-dir PATH  Install into a custom Codex skills directory
@@ -54,6 +54,11 @@ function defaultSkillsDir() {
   return path.join(codexHome, "skills");
 }
 
+function defaultBackupDir() {
+  const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), ".codex");
+  return path.join(codexHome, "backups", `${SKILL_NAME}-installs`);
+}
+
 function copyDirectory(source, destination) {
   fs.mkdirSync(destination, { recursive: true });
   for (const entry of fs.readdirSync(source, { withFileTypes: true })) {
@@ -67,12 +72,13 @@ function copyDirectory(source, destination) {
   }
 }
 
-function backupPath(destination) {
+function backupPath(destination, backupDir = defaultBackupDir()) {
   const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\..+$/, "Z");
-  let candidate = `${destination}.backup-${stamp}`;
+  const baseName = path.basename(destination);
+  let candidate = path.join(backupDir, `${baseName}.backup-${stamp}`);
   let suffix = 2;
   while (fs.existsSync(candidate)) {
-    candidate = `${destination}.backup-${stamp}-${suffix}`;
+    candidate = path.join(backupDir, `${baseName}.backup-${stamp}-${suffix}`);
     suffix += 1;
   }
   return candidate;
@@ -99,6 +105,7 @@ function install(rawOptions = {}) {
 
   fs.mkdirSync(skillsDir, { recursive: true });
   if (exists) {
+    fs.mkdirSync(path.dirname(plannedBackup), { recursive: true });
     fs.renameSync(destination, plannedBackup);
   }
   copyDirectory(source, destination);
@@ -124,7 +131,7 @@ function main(argv = process.argv.slice(2)) {
   if (result.backup) console.log(`Previous install backed up to: ${result.backup}`);
   console.log("");
   console.log("Restart Codex, then run:");
-  console.log("  Use $venture-surgeon to pressure-test this startup idea: ...");
+  console.log("  Use $build-gate before building this startup idea: ...");
 }
 
 if (require.main === module) {

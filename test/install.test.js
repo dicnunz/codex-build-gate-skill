@@ -7,7 +7,7 @@ const test = require("node:test");
 const { install, parseArgs } = require("../scripts/install");
 
 function tempDir() {
-  return fs.mkdtempSync(path.join(os.tmpdir(), "venture-surgeon-test-"));
+  return fs.mkdtempSync(path.join(os.tmpdir(), "build-gate-test-"));
 }
 
 test("parseArgs supports safe installer options", () => {
@@ -20,9 +20,9 @@ test("parseArgs supports safe installer options", () => {
 test("install copies the bundled skill", () => {
   const dir = tempDir();
   const result = install({ skillsDir: dir });
-  assert.equal(result.destination, path.join(dir, "venture-surgeon"));
-  assert.ok(fs.existsSync(path.join(dir, "venture-surgeon", "SKILL.md")));
-  assert.ok(fs.existsSync(path.join(dir, "venture-surgeon", "references", "operating-manual.md")));
+  assert.equal(result.destination, path.join(dir, "build-gate"));
+  assert.ok(fs.existsSync(path.join(dir, "build-gate", "SKILL.md")));
+  assert.ok(fs.existsSync(path.join(dir, "build-gate", "references", "operating-manual.md")));
 });
 
 test("install refuses to overwrite without force", () => {
@@ -34,10 +34,11 @@ test("install refuses to overwrite without force", () => {
 test("force install creates a timestamped backup", () => {
   const dir = tempDir();
   install({ skillsDir: dir });
-  fs.writeFileSync(path.join(dir, "venture-surgeon", "marker.txt"), "old");
+  fs.writeFileSync(path.join(dir, "build-gate", "marker.txt"), "old");
   const result = install({ skillsDir: dir, force: true });
   assert.ok(result.backup);
+  assert.ok(result.backup.includes(path.join(".codex", "backups", "build-gate-installs")));
   assert.ok(fs.existsSync(path.join(result.backup, "marker.txt")));
-  assert.ok(fs.existsSync(path.join(dir, "venture-surgeon", "SKILL.md")));
-  assert.equal(fs.existsSync(path.join(dir, "venture-surgeon", "marker.txt")), false);
+  assert.ok(fs.existsSync(path.join(dir, "build-gate", "SKILL.md")));
+  assert.equal(fs.existsSync(path.join(dir, "build-gate", "marker.txt")), false);
 });
